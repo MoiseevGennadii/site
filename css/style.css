@@ -1253,3 +1253,90 @@ footer {
         font-size: 1.3rem;
     }
 }
+
+.personal-photo {
+    background-image: url('images/photo_2026-03-18_15-25-32.jpg');
+    background-size: cover;
+    background-position: center;
+    text-indent: -9999px; /* Прячем эмодзи */
+}
+
+/* Стили для фото в разделе "Обо мне" */
+.about-photo-img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover; /* Чтобы фото красиво заполнило круг */
+    border: 4px solid #4db8ff;
+    box-shadow: 0 10px 25px rgba(77, 184, 255, 0.3);
+    display: block;
+}
+
+/* Для планшетов */
+@media (max-width: 768px) {
+    .about-photo-img {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+/* Для телефонов */
+@media (max-width: 480px) {
+    .about-photo-img {
+        width: 160px;
+        height: 160px;
+    }
+}
+
+/* Стили для фото в контактах */
+.contact-photo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #4db8ff;
+    box-shadow: 0 15px 30px rgba(77, 184, 255, 0.25);
+    display: block;
+}
+
+/* Обновляем стиль для аватара */
+.contact-person-card .person-avatar {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Убираем старый фон */
+.contact-person-card .person-avatar {
+    background: none;
+    box-shadow: none;
+    border: none;
+}
+
+/* Адаптация для планшетов */
+@media (max-width: 768px) {
+    .contact-photo {
+        width: 110px;
+        height: 110px;
+    }
+    
+    .contact-person-card .person-avatar {
+        width: 110px;
+        height: 110px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-photo {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .contact-person-card .person-avatar {
+        width: 90px;
+        height: 90px;
+    }
+}
