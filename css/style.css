@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+    overflow-x: hidden; /* Запрещаем горизонтальный скролл */
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
@@ -13,6 +18,8 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
+    width: 100%;
+    max-width: 100vw;
 }
 
 /* Фоновое изображение */
@@ -27,6 +34,7 @@ body {
     background-repeat: no-repeat;
     opacity: 0.12;
     z-index: -1;
+    pointer-events: none;
 }
 
 /* Шапка */
@@ -38,6 +46,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
+    width: 100%;
 }
 
 .main-nav ul {
@@ -46,6 +55,8 @@ header {
     justify-content: center;
     flex-wrap: wrap;
     gap: 2.5rem;
+    margin: 0;
+    padding: 0;
 }
 
 .main-nav a {
@@ -56,6 +67,7 @@ header {
     transition: all 0.3s;
     border-bottom: 2px solid transparent;
     font-size: 1.1rem;
+    display: inline-block;
 }
 
 .main-nav a:hover, .main-nav a.active {
@@ -65,12 +77,12 @@ header {
 
 /* Основной контент */
 main {
-    flex: 1;
+    flex: 1 0 auto;
     width: 90%;
     max-width: 1300px;
     margin: 2rem auto;
     background-color: rgba(255, 255, 255, 0.92);
-    padding: 2.5rem;
+    padding: 2rem;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     backdrop-filter: blur(5px);
@@ -79,6 +91,7 @@ main {
 .content-wrapper {
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
 }
 
 /* Заголовки */
@@ -86,6 +99,7 @@ h1, h2, h3 {
     text-align: center;
     margin-bottom: 1.5rem;
     color: #1a232e;
+    word-wrap: break-word;
 }
 
 h1 {
@@ -106,12 +120,7 @@ h1::after {
     border-radius: 2px;
 }
 
-h2 {
-    font-size: 2rem;
-    margin-top: 1rem;
-}
-
-/* Главная страница */
+/* ===== СТИЛИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ ===== */
 .advantages {
     display: flex;
     flex-wrap: wrap;
@@ -152,7 +161,409 @@ h2 {
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
-/* Кнопка */
+/* ===== СТИЛИ ДЛЯ СТРАНИЦЫ О КОМПАНИИ ===== */
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-content h2 {
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.features-list {
+    list-style: none;
+    margin: 1.5rem 0;
+}
+
+.features-list li {
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    background-color: #f1f9ff;
+    border-left: 4px solid #4db8ff;
+    border-radius: 0 5px 5px 0;
+}
+
+/* ===== СТИЛИ ДЛЯ ПОРТФОЛИО ===== */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+    width: 100%;
+}
+
+.portfolio-item {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    border: 1px solid #eee;
+    width: 100%;
+    max-width: 100%;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    border-color: #4db8ff;
+}
+
+.portfolio-image {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.portfolio-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+    display: block;
+}
+
+.portfolio-item:hover .portfolio-image img {
+    transform: scale(1.05);
+}
+
+.portfolio-info {
+    padding: 1.5rem;
+}
+
+.portfolio-info h3 {
+    text-align: left;
+    margin-bottom: 0.5rem;
+    color: #1a232e;
+    font-size: 1.3rem;
+}
+
+.portfolio-info p {
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+.portfolio-category {
+    color: #4db8ff;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.portfolio-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.portfolio-tags span {
+    background: #f0f7ff;
+    color: #4db8ff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+.portfolio-cta {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 3rem;
+    background: linear-gradient(135deg, #f8faff, #ffffff);
+    border-radius: 20px;
+}
+
+.portfolio-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    color: #555;
+}
+
+/* ===== СТИЛИ ДЛЯ КОНТАКТОВ (НОВЫЕ) ===== */
+.contacts-split-container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2rem;
+    margin: 2rem 0;
+    width: 100%;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-left {
+    height: 100%;
+}
+
+.contact-person-card {
+    background: white;
+    border-radius: 30px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(77, 184, 255, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.contact-person-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(77, 184, 255, 0.2);
+    border-color: #4db8ff;
+}
+
+.contact-person-card .person-avatar {
+    width: 140px;
+    height: 140px;
+    background: linear-gradient(135deg, #f0f7ff, #ffffff);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 15px 30px rgba(77, 184, 255, 0.25);
+    border: 4px solid #4db8ff;
+}
+
+.contact-person-card .person-avatar i {
+    font-size: 80px;
+    color: #4db8ff;
+}
+
+.contact-person-card h2 {
+    font-size: 2.2rem;
+    margin-bottom: 0.3rem;
+    color: #1a232e;
+}
+
+.contact-person-card .person-title {
+    color: #4db8ff;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+.contact-person-card .person-phone {
+    background: linear-gradient(135deg, #f8faff, #e6f0ff);
+    padding: 1.2rem 1.5rem;
+    border-radius: 20px;
+    margin: 1rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    text-align: left;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.contact-person-card .person-phone:hover {
+    border-color: #4db8ff;
+    background: white;
+    transform: scale(1.02);
+}
+
+.contact-person-card .phone-icon {
+    width: 54px;
+    height: 54px;
+    background: #4CAF50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.contact-person-card .phone-icon i {
+    font-size: 28px;
+    color: white;
+}
+
+.contact-person-card .phone-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.contact-person-card .phone-label {
+    font-size: 0.9rem;
+    color: #666;
+    display: block;
+    margin-bottom: 0.2rem;
+}
+
+.contact-person-card .phone-number {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #1a232e;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 0.1rem;
+    transition: color 0.3s;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.contact-person-card .phone-number:hover {
+    color: #4CAF50;
+}
+
+.contact-person-card .phone-note {
+    font-size: 0.8rem;
+    color: #999;
+    display: block;
+    margin-top: 0.1rem;
+}
+
+.contact-person-card .person-quote {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 2px dashed #e0e7ff;
+    font-style: italic;
+    color: #4db8ff;
+    font-size: 1.1rem;
+}
+
+.contact-person-card .person-quote p {
+    margin: 0;
+}
+
+.contact-right {
+    background: white;
+    border-radius: 30px;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    border: 1px solid rgba(77, 184, 255, 0.2);
+    max-width: 550px;
+    margin-left: auto;
+}
+
+.contact-right h3 {
+    text-align: left;
+    margin-bottom: 1.5rem;
+    color: #1a232e;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.contact-right h3 i {
+    color: #4db8ff;
+    font-size: 1.5rem;
+}
+
+.social-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.social-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+    border-radius: 16px;
+    text-decoration: none;
+    transition: all 0.3s;
+    background: #f8faff;
+    border: 1px solid transparent;
+}
+
+.social-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.social-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.social-icon i {
+    font-size: 22px;
+    color: white;
+}
+
+.social-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.social-name {
+    font-weight: bold;
+    color: #1a232e;
+    display: block;
+    margin-bottom: 0.1rem;
+    font-size: 1rem;
+}
+
+.social-handle {
+    font-size: 0.8rem;
+    color: #666;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
+
+.social-action {
+    color: #ccc;
+    transition: transform 0.3s;
+    margin-right: 0.2rem;
+    font-size: 0.9rem;
+}
+
+.social-item:hover .social-action {
+    transform: translateX(5px);
+    color: #4db8ff;
+}
+
+/* Цвета для иконок соцсетей */
+.social-item.telegram .social-icon { background: #0088cc; }
+.social-item.viber .social-icon { background: #665cac; }
+.social-item.whatsapp .social-icon { background: #25D366; }
+.social-item.instagram .social-icon { background: linear-gradient(45deg, #f09433, #d62976, #962fbf); }
+.social-item.facebook .social-icon { background: #1877f2; }
+.social-item.vk .social-icon { background: #4c75a3; }
+.social-item.email .social-icon { background: #FF5722; }
+
+/* При наведении меняем фон */
+.social-item.telegram:hover { background: rgba(0, 136, 204, 0.1); border-color: #0088cc; }
+.social-item.viber:hover { background: rgba(102, 92, 172, 0.1); border-color: #665cac; }
+.social-item.whatsapp:hover { background: rgba(37, 211, 102, 0.1); border-color: #25D366; }
+.social-item.instagram:hover { background: rgba(225, 48, 108, 0.1); border-color: #d62976; }
+.social-item.facebook:hover { background: rgba(24, 119, 242, 0.1); border-color: #1877f2; }
+.social-item.vk:hover { background: rgba(76, 117, 163, 0.1); border-color: #4c75a3; }
+.social-item.email:hover { background: rgba(255, 87, 34, 0.1); border-color: #FF5722; }
+
+.contact-note {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f0f7ff;
+    border-radius: 15px;
+    text-align: center;
+    color: #555;
+}
+
+.contact-note p {
+    margin: 0.5rem 0;
+}
+
+/* Кнопка CTA */
 .cta-button {
     display: inline-block;
     background: #4db8ff;
@@ -172,7 +583,253 @@ h2 {
     box-shadow: 0 6px 20px rgba(77, 184, 255, 0.4);
 }
 
-/* Страница Обо мне */
+/* Подвал */
+footer {
+    background-color: rgba(26, 35, 46, 0.98);
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    width: 100%;
+    flex-shrink: 0;
+    margin-top: auto;
+    position: relative;
+    bottom: 0;
+    left: 0;
+}
+
+#copyright {
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+/* ===== АДАПТАЦИЯ ===== */
+@media (max-width: 992px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .contacts-split-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .contact-right {
+        max-width: 100%;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+    
+    .main-nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        justify-content: center;
+    }
+    
+    .main-nav a {
+        font-size: 0.95rem;
+        padding: 0.3rem 0.8rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    main {
+        width: 95%;
+        padding: 1.2rem;
+        margin: 1rem auto;
+    }
+    
+    /* Главная */
+    .advantages {
+        gap: 1rem;
+    }
+    
+    .advantage-item {
+        flex-basis: 100%;
+        padding: 1.5rem;
+    }
+    
+    /* Портфолио */
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    
+    .portfolio-image {
+        height: 180px;
+    }
+    
+    /* Контакты */
+    .contact-person-card {
+        padding: 1.5rem;
+    }
+    
+    .contact-person-card .person-avatar {
+        width: 110px;
+        height: 110px;
+    }
+    
+    .contact-person-card .person-avatar i {
+        font-size: 65px;
+    }
+    
+    .contact-person-card h2 {
+        font-size: 1.8rem;
+    }
+    
+    .contact-person-card .person-phone {
+        padding: 1rem 1.2rem;
+        white-space: normal;
+    }
+    
+    .contact-person-card .phone-icon {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .contact-person-card .phone-icon i {
+        font-size: 22px;
+    }
+    
+    .contact-person-card .phone-number {
+        font-size: 1.1rem;
+        white-space: normal;
+    }
+    
+    .contact-right {
+        padding: 1.5rem;
+    }
+    
+    .social-item {
+        padding: 0.8rem 1rem;
+    }
+    
+    .social-icon {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .social-icon i {
+        font-size: 20px;
+    }
+    
+    .social-name {
+        font-size: 0.95rem;
+    }
+    
+    .social-handle {
+        font-size: 0.75rem;
+        max-width: 150px;
+    }
+    
+    .contact-note {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    footer {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+    
+    h2 {
+        font-size: 1.3rem;
+    }
+    
+    main {
+        padding: 1rem;
+    }
+    
+    .advantage-item h3 {
+        font-size: 1.3rem;
+    }
+    
+    .contact-person-card .person-avatar {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .contact-person-card .person-avatar i {
+        font-size: 55px;
+    }
+    
+    .contact-person-card h2 {
+        font-size: 1.5rem;
+    }
+    
+    .contact-person-card .person-title {
+        font-size: 1rem;
+    }
+    
+    .contact-person-card .phone-number {
+        font-size: 1rem;
+    }
+    
+    .contact-right h3 {
+        font-size: 1.2rem;
+    }
+    
+    .social-handle {
+        max-width: 120px;
+    }
+    
+    .portfolio-image {
+        height: 160px;
+    }
+}
+
+@media (max-width: 360px) {
+    .main-nav ul {
+        gap: 0.3rem;
+    }
+    
+    .main-nav a {
+        font-size: 0.85rem;
+        padding: 0.2rem 0.5rem;
+    }
+    
+    .contact-person-card .person-phone {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .contact-person-card .phone-info {
+        text-align: center;
+    }
+    
+    .social-item {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .social-info {
+        width: calc(100% - 50px);
+    }
+    
+    .social-handle {
+        max-width: 100%;
+    }
+    
+    .portfolio-tags span {
+        font-size: 0.75rem;
+    }
+}
+
+/* ===== СТИЛИ ДЛЯ СТРАНИЦЫ "ОБО МНЕ" ===== */
 .about-card {
     display: flex;
     gap: 3rem;
@@ -208,6 +865,7 @@ h2 {
 .about-text h2 {
     text-align: left;
     margin-bottom: 0.5rem;
+    font-size: 2rem;
 }
 
 .about-subtitle {
@@ -220,6 +878,8 @@ h2 {
 .about-text p {
     margin-bottom: 1rem;
     font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444;
 }
 
 .features-grid {
@@ -242,6 +902,7 @@ h2 {
 .feature-block:hover {
     border-color: #4db8ff;
     transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(77, 184, 255, 0.15);
 }
 
 .feature-icon {
@@ -253,6 +914,12 @@ h2 {
 .feature-block h3 {
     color: #4db8ff;
     margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+}
+
+.feature-block p {
+    color: #555;
+    line-height: 1.5;
 }
 
 .quote-block {
@@ -268,59 +935,112 @@ h2 {
     font-size: 1.4rem;
     font-style: italic;
     margin-bottom: 1rem;
+    line-height: 1.6;
 }
 
 .quote-block span {
     color: #4db8ff;
     font-size: 1.1rem;
+    font-weight: 500;
 }
 
-/* Страница Портфолио */
+/* Адаптация для планшетов */
+@media (max-width: 992px) {
+    .about-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .about-text h2 {
+        text-align: center;
+    }
+    
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .about-card {
+        padding: 1.5rem;
+    }
+    
+    .about-photo {
+        flex: 0 0 auto;
+    }
+    
+    .photo-placeholder {
+        width: 180px;
+        height: 180px;
+        font-size: 3.5rem;
+    }
+    
+    .about-text h2 {
+        font-size: 1.8rem;
+    }
+    
+    .about-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .about-text p {
+        font-size: 1rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    
+    .feature-block {
+        padding: 1.5rem;
+    }
+    
+    .quote-block {
+        padding: 2rem 1.5rem;
+    }
+    
+    .quote-block p {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .photo-placeholder {
+        width: 150px;
+        height: 150px;
+        font-size: 3rem;
+    }
+    
+    .about-text h2 {
+        font-size: 1.5rem;
+    }
+    
+    .about-subtitle {
+        font-size: 1rem;
+    }
+    
+    .feature-icon {
+        font-size: 2rem;
+    }
+    
+    .feature-block h3 {
+        font-size: 1.2rem;
+    }
+    
+    .quote-block p {
+        font-size: 1.1rem;
+    }
+}
+
+/* ===== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ ПОРТФОЛИО ===== */
 .portfolio-intro {
     text-align: center;
     font-size: 1.2rem;
     max-width: 700px;
     margin: 0 auto 3rem;
     color: #555;
-}
-
-.portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2.5rem;
-    margin: 2rem 0;
-}
-
-.portfolio-item {
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    transition: all 0.3s;
-    border: 1px solid #eee;
-}
-
-.portfolio-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    border-color: #4db8ff;
-}
-
-.portfolio-image {
-    position: relative;
-    height: 220px;
-    overflow: hidden;
-}
-
-.portfolio-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s;
-}
-
-.portfolio-item:hover .portfolio-image img {
-    transform: scale(1.1);
 }
 
 .portfolio-overlay {
@@ -333,44 +1053,14 @@ h2 {
     border-radius: 25px;
     font-size: 0.85rem;
     font-weight: bold;
-}
-
-.portfolio-info {
-    padding: 1.8rem;
-}
-
-.portfolio-info h3 {
-    text-align: left;
-    margin-bottom: 0.5rem;
-    color: #1a232e;
-    font-size: 1.3rem;
+    z-index: 2;
 }
 
 .portfolio-category {
     color: #4db8ff;
     font-weight: 500;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     font-size: 0.95rem;
-}
-
-.portfolio-info p {
-    color: #555;
-    margin-bottom: 1.2rem;
-    line-height: 1.5;
-}
-
-.portfolio-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.portfolio-tags span {
-    background: #f0f7ff;
-    color: #4db8ff;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
 }
 
 .portfolio-cta {
@@ -379,396 +1069,16 @@ h2 {
     padding: 3rem;
     background: linear-gradient(135deg, #f8faff, #ffffff);
     border-radius: 20px;
+    border: 1px solid rgba(77, 184, 255, 0.2);
 }
 
-/* Страница Контакты */
-.contacts-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-    margin: 2rem 0;
+.portfolio-cta h2 {
+    margin-bottom: 1rem;
+    color: #1a232e;
 }
 
-.contact-card {
-    background: white;
-    border-radius: 20px;
-    padding: 2.5rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.contact-person {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 2px solid #f0f0f0;
-}
-
-.person-avatar {
-    width: 120px;
-    height: 120px;
-    background: linear-gradient(135deg, #4db8ff, #2a9eff);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    color: white;
-    margin: 0 auto 1rem;
-    box-shadow: 0 10px 25px rgba(77, 184, 255, 0.3);
-}
-
-.person-title {
-    color: #777;
-    font-size: 1.1rem;
-}
-
-.contact-methods {
-    margin: 2rem 0;
-}
-
-.contact-method {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.2rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.contact-method:last-child {
-    border-bottom: none;
-}
-
-.method-icon {
-    font-size: 1.8rem;
-    min-width: 40px;
-    text-align: center;
-}
-
-.method-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.method-label {
-    font-weight: bold;
-    color: #4db8ff;
-    margin-bottom: 0.3rem;
-}
-
-.method-link {
-    color: #333;
-    text-decoration: none;
-    font-size: 1.2rem;
-    margin-bottom: 0.2rem;
-    transition: color 0.3s;
-}
-
-.method-link:hover {
-    color: #4db8ff;
-}
-
-.method-note {
-    font-size: 0.85rem;
-    color: #999;
-}
-
-.telegram-icon {
-    color: #0088cc;
-}
-
-.contact-social {
-    text-align: center;
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 2px solid #f0f0f0;
-}
-
-.social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 1.2rem;
-    margin-top: 1rem;
-}
-
-.social-icon {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    text-decoration: none;
-    color: white;
-    transition: transform 0.3s;
-}
-
-.social-icon.telegram { background: #0088cc; }
-.social-icon.viber { background: #665cac; }
-.social-icon.whatsapp { background: #25D366; }
-.social-icon.instagram { background: #E4405F; }
-
-.social-icon:hover {
-    transform: scale(1.1);
-}
-
-/* Форма */
-.contact-form {
-    background: white;
-    border-radius: 20px;
-    padding: 2.5rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.contact-form h3 {
-    margin-bottom: 2rem;
-}
-
-.form-group {
-    margin-bottom: 1.2rem;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 1rem;
-    border: 2px solid #eee;
-    border-radius: 12px;
-    font-family: inherit;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #4db8ff;
-}
-
-.submit-btn {
-    width: 100%;
-    padding: 1rem;
-    background: #4db8ff;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.submit-btn:hover {
-    background: #2a9eff;
-    transform: scale(1.02);
-}
-
-.form-note {
-    text-align: center;
-    margin-top: 1rem;
-    color: #777;
-    font-size: 0.9rem;
-}
-
-.contact-note {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    background: #f0f7ff;
-    border-radius: 15px;
-    text-align: center;
+.portfolio-cta p {
+    margin-bottom: 1.5rem;
     color: #555;
-}
-
-.contact-note p {
-    margin: 0.5rem 0;
-}
-
-/* Подвал */
-footer {
-    background-color: rgba(26, 35, 46, 0.98);
-    color: white;
-    text-align: center;
-    padding: 1.8rem;
-    margin-top: auto;
-}
-
-#copyright {
-    font-size: 1rem;
-    letter-spacing: 1px;
-}
-
-/* Адаптация для телефонов */
-@media (max-width: 992px) {
-    .about-card {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .about-text h2 {
-        text-align: center;
-    }
-    
-    .contacts-container {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .main-nav ul {
-        flex-direction: column;
-        gap: 0.8rem;
-        text-align: center;
-    }
-    
-    h1 {
-        font-size: 2rem;
-    }
-    
-    h2 {
-        font-size: 1.6rem;
-    }
-    
-    main {
-        width: 95%;
-        padding: 1.5rem;
-    }
-    
-    .portfolio-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .feature-block {
-        padding: 1.5rem;
-    }
-    
-    .contact-method {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 0.5rem;
-    }
-    
-    .method-info {
-        align-items: center;
-    }
-}
-
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.8rem;
-    }
-    
-    .advantage-item {
-        flex-basis: 100%;
-    }
-    
-    .photo-placeholder {
-        width: 180px;
-        height: 180px;
-        font-size: 3.5rem;
-    }
-    
-    .contact-card,
-    .contact-form {
-        padding: 1.5rem;
-    }
-    
-    .quote-block {
-        padding: 2rem 1rem;
-    }
-    
-    .quote-block p {
-        font-size: 1.1rem;
-    }
-}
-
-/* Дополнительные стили для SVG иконок */
-.method-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: rgba(77, 184, 255, 0.1);
-    transition: all 0.3s;
-}
-
-.contact-method:hover .method-icon {
-    transform: scale(1.1);
-    background: rgba(77, 184, 255, 0.2);
-}
-
-.method-icon svg {
-    width: 28px;
-    height: 28px;
-}
-
-/* Специальные цвета для иконок при наведении */
-.contact-method:nth-child(1):hover .method-icon svg path {
-    fill: #2a9eff;
-}
-
-.contact-method:nth-child(2):hover .method-icon svg path {
-    fill: #006699;
-}
-
-.social-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    transition: all 0.3s;
-}
-
-.social-icon:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.social-icon svg {
-    width: 28px;
-    height: 28px;
-}
-
-/* Анимация для кнопки отправки */
-.submit-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.submit-btn svg {
-    transition: transform 0.3s;
-}
-
-.submit-btn:hover svg {
-    transform: translateX(5px);
-}
-
-/* Адаптация для мобильных */
-@media (max-width: 768px) {
-    .method-icon {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .method-icon svg {
-        width: 22px;
-        height: 22px;
-    }
-    
-    .social-icon {
-        width: 42px;
-        height: 42px;
-    }
-    
-    .social-icon svg {
-        width: 22px;
-        height: 22px;
-    }
+    font-size: 1.1rem;
 }
