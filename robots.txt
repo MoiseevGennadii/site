@@ -1,0 +1,12 @@
+# robots.txt для minsksite.vercel.app
+User-agent: *
+Allow: /
+
+# Запрещаем индексацию служебных папок
+Disallow: /css/
+Disallow: /js/
+Disallow: /images/
+
+# Указываем путь к sitemap
+Sitemap: https://minsksite.vercel.app/sitemap.xml
+
